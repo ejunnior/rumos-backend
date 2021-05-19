@@ -5,6 +5,11 @@
 
     public class SalesUnitOfWork : DbContext
     {
+        public void SetModified<TEntiy>(TEntiy item)
+        {
+            base.Entry<TEntiy>(item).State = EntityState.Modified;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
