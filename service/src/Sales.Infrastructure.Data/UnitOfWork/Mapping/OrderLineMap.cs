@@ -1,6 +1,7 @@
 ﻿namespace Sales.Infrastructure.Data.UnitOfWork.Mapping
 {
     using Domain.ShoppingCart.Aggregates.OrderAggregate;
+    using Domain.ShoppingCart.Aggregates.ProductAggregate;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,6 +23,9 @@
                     p => UnitPrice.Create(p).Value)
                 .IsRequired()
                 .HasColumnType("decimal(7,2)");
+
+            builder
+                .HasOne<Product>(p => p.Product);
         }
     }
 }
