@@ -15,6 +15,12 @@ namespace Sales.Domain.ShoppingCart.Aggregates.ProductAggregate
 
         public static Result<ProductName> Create(string value)
         {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return Result
+                    .Failure<ProductName>("Product name is required");
+            }
+
             return Result
                 .Success(new ProductName(value));
         }
