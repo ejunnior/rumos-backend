@@ -10,6 +10,13 @@
         {
             builder
                 .HasKey(k => k.Id);
+
+            builder.Property(p => p.ProductName)
+                .HasConversion(p => p.Value,
+                    p => ProductName.Create(p).Value)
+                .IsRequired()
+                .HasMaxLength(80)
+                .HasColumnType("varchar");
         }
     }
 }

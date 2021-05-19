@@ -1,10 +1,10 @@
 ﻿using CSharpFunctionalExtensions;
 
-namespace Sales.Domain.ShoppingCart.Aggregates.CustomerAggregate
+namespace Sales.Domain.ShoppingCart.Aggregates.ProductAggregate
 {
     using Core;
 
-    public class ProductName : Core.ValueObject<ProductName>
+    public class ProductName : ValueObject<ProductName>
     {
         private ProductName(string value)
         {
@@ -19,9 +19,9 @@ namespace Sales.Domain.ShoppingCart.Aggregates.CustomerAggregate
                 .Success(new ProductName(value));
         }
 
-        public static implicit operator string(ProductName customerName)
+        public static implicit operator string(ProductName productName)
         {
-            return customerName.Value;
+            return productName.Value;
         }
     }
 }

@@ -11,7 +11,7 @@
             UnitPrice unitPrice)
         {
             Product = product;
-            Quantiy = quantity;
+            Quantity = quantity;
             UnitPrice = unitPrice;
         }
 

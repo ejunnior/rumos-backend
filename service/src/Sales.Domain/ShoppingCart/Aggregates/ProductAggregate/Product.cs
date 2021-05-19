@@ -4,5 +4,11 @@
 
     public class Product : AggregateRoot
     {
+        public Product(ProductName productName)
+        {
+            ProductName = productName;
+        }
+
+        public ProductName ProductName { get; }
     }
 }

@@ -9,7 +9,7 @@
         private readonly IList<Address> _addresses;
 
         public Customer(
-            CustomerName customerName)
+            ProductName customerName)
         {
             CustomerName = customerName;
             _addresses = new List<Address>();
@@ -17,7 +17,7 @@
 
         public IReadOnlyCollection<Address> Addresses => _addresses.ToList();
 
-        public CustomerName CustomerName { get; }
+        public ProductName CustomerName { get; }
 
         public void AddAddress(
             string identification,
