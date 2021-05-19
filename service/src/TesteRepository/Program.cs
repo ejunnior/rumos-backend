@@ -25,7 +25,8 @@ namespace TesteRepository
 
                 var unitOfWork = new SalesUnitOfWork();
 
-                var repository = new Repository<Product>(unitOfWork);
+                //var repository = new Repository<Product>(unitOfWork);
+                var repository = new ProductRepository(unitOfWork);
 
                 repository.Add(product);
 
