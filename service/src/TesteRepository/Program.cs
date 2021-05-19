@@ -2,8 +2,11 @@
 
 namespace TesteRepository
 {
+    using Sales.Domain.ShoppingCart.Aggregates.CustomerAggregate;
     using Sales.Domain.ShoppingCart.Aggregates.ProductAggregate;
+    using Sales.Infrastructure.Data.ShoppingCart.Repositories;
     using Sales.Infrastructure.Data.UnitOfWork;
+    using ProductName = Sales.Domain.ShoppingCart.Aggregates.ProductAggregate.ProductName;
 
     internal class Program
     {
@@ -22,7 +25,11 @@ namespace TesteRepository
 
                 var unitOfWork = new SalesUnitOfWork();
 
-                unitOfWork.Add(product); //commando de insert do sql server
+                var repository = new Repository<Product>(unitOfWork);
+
+                repository.Add(product);
+
+                //unitOfWork.Add(product); //commando de insert do sql server
 
                 unitOfWork.SaveChanges(); //Comando de commit do sql server
 
