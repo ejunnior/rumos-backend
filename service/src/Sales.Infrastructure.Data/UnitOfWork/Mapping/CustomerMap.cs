@@ -14,6 +14,7 @@
             builder
                 .HasMany(p => p.Addresses)
                 .WithOne()
+                .OnDelete(DeleteBehavior.Cascade)
                 .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
 
             builder.Property(p => p.CustomerName)

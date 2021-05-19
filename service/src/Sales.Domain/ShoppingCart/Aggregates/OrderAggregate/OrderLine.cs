@@ -15,6 +15,10 @@
             UnitPrice = unitPrice;
         }
 
+        private OrderLine()
+        {
+        }
+
         public Product Product { get; }
 
         public Quantity Quantity { get; }

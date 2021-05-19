@@ -2,14 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Core;
     using CustomerAggregate;
 
     public class Order : AggregateRoot
     {
+        private readonly IList<OrderLine> _orderLines;
+
         public Order()
         {
             OrderDate = DateTime.UtcNow;
+            _orderLines = new List<OrderLine>();
         }
 
         public Customer Customer { get; }
@@ -22,7 +26,7 @@
 
         public DateTime OrderDate { get; }
 
-        public IReadOnlyCollection<OrderLine> OrderLines { get; }
+        public IReadOnlyCollection<OrderLine> OrderLines => _orderLines.ToList();
 
         public string SecurityCode { get; }
 
