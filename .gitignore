@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/service/src/.vs
+/service/src/Sales.Domain/.vs/Sales.Domain/v16
+/service/src/Sales.Domain/bin/Debug/netstandard2.1
+/service/src/Sales.Domain/obj
+/service/src/Sales.Domain.Core/bin/Debug/netstandard2.1
+/service/src/Sales.Domain.Core/obj
+/service/src/Sales.Infrastructure.Data/bin/Debug/net5.0
+/service/src/Sales.Infrastructure.Data/obj
