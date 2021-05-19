@@ -10,6 +10,18 @@
         {
             builder
                 .HasKey(k => k.Id);
+
+            builder.Property(p => p.Quantity)
+                .HasConversion(p => p.Value,
+                    p => Quantity.Create(p).Value)
+                .IsRequired()
+                .HasColumnType("int");
+
+            builder.Property(p => p.UnitPrice)
+                .HasConversion(p => p.Value,
+                    p => UnitPrice.Create(p).Value)
+                .IsRequired()
+                .HasColumnType("decimal(7,2)");
         }
     }
 }

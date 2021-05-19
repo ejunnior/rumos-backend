@@ -8,8 +8,10 @@
     {
         private readonly IList<Address> _addresses;
 
-        public Customer()
+        public Customer(
+            CustomerName customerName)
         {
+            CustomerName = customerName;
             _addresses = new List<Address>();
         }
 
