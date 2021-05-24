@@ -19,7 +19,7 @@
 
             builder.Property(p => p.CustomerName)
                 .HasConversion(p => p.Value,
-                    p => ProductName.Create(p).Value)
+                    p => CustomerName.Create(p).Value)
                 .IsRequired()
                 .HasMaxLength(80)
                 .HasColumnType("varchar");

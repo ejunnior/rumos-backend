@@ -10,6 +10,7 @@
             Product = product;
         }
 
+        //Motivo - Mapeamento do Entity Framework
         private CartItem()
         {
         }

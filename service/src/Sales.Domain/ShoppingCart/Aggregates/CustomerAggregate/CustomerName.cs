@@ -4,22 +4,22 @@ namespace Sales.Domain.ShoppingCart.Aggregates.CustomerAggregate
 {
     using Core;
 
-    public class ProductName : Core.ValueObject<ProductName>
+    public class CustomerName : Core.ValueObject<CustomerName>
     {
-        private ProductName(string value)
+        private CustomerName(string value)
         {
             Value = value;
         }
 
         public string Value { get; }
 
-        public static Result<ProductName> Create(string value)
+        public static Result<CustomerName> Create(string value)
         {
             return Result
-                .Success(new ProductName(value));
+                .Success(new CustomerName(value));
         }
 
-        public static implicit operator string(ProductName customerName)
+        public static implicit operator string(CustomerName customerName)
         {
             return customerName.Value;
         }
