@@ -1,5 +1,6 @@
 ﻿namespace Sales.Infrastructure.Data.ShoppingCart.Repositories
 {
+    using System.Threading.Tasks;
     using Domain.Core;
     using UnitOfWork;
 
@@ -22,12 +23,12 @@
             }
         }
 
-        public TEntity Get(int id)
+        public async Task<TEntity> Get(int id)
         {
             if (id != default)
             {
-                return _unitOfWork
-                    .Set<TEntity>().Find(id);
+                return await _unitOfWork
+                    .Set<TEntity>().FindAsync(id);
             }
 
             return null;

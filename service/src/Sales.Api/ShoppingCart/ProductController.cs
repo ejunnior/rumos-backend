@@ -7,6 +7,25 @@
 
     public class ProductController : BaseController
     {
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var query = new GetProductByIdQuery(id);
+
+            var handler = new GetProductByIdHandler();
+
+            var result = await handler.HandlerAsync(query);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(result);
+            }
+        }
+
         [HttpPost]
         [Consumes("application/json")]
         public async Task<IActionResult> Register([FromBody] RegisterProductDto dto)
