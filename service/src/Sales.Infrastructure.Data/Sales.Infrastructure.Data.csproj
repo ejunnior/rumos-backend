@@ -26,9 +26,4 @@
 		<ProjectReference Include="..\Sales.Domain.Core\Sales.Domain.Core.csproj" />
 		<ProjectReference Include="..\Sales.Domain\Sales.Domain.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="ShoppingCart\" />
-		<Folder Include="ShoppingCart\Repositories\" />
-	</ItemGroup>
 </Project>
