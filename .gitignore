@@ -12,3 +12,6 @@
 /service/src/Sales.Infrastructure.Data/obj
 /service/src/TesteRepository/bin/Debug/net5.0
 /service/src/TesteRepository/obj
+/service/src/Sales.Api/bin/Debug/net5.0
+/service/src/Sales.Api/obj
+/service/src/Sales.Application/obj
