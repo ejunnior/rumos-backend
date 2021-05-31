@@ -1,11 +1,18 @@
 ﻿namespace Sales.Infrastructure.Data.UnitOfWork
 {
+    using System.Threading.Tasks;
+    using Domain.Core;
     using Mapping;
     using Microsoft.EntityFrameworkCore;
 
     public class SalesUnitOfWork : DbContext
     {
-        public void SetModified<TEntiy>(TEntiy item)
+        public async Task CommitAsync()
+        {
+            await base.SaveChangesAsync();
+        }
+
+        public void SetModified<TEntiy>(TEntiy item) where TEntiy : AggregateRoot
         {
             base.Entry<TEntiy>(item).State = EntityState.Modified;
         }

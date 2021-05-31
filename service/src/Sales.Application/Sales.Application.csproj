@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ShoppingCart\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Sales.Domain\Sales.Domain.csproj" />
+    <ProjectReference Include="..\Sales.Infrastructure.Data\Sales.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>
