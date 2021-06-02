@@ -9,6 +9,11 @@
             ProductName = productName;
         }
 
-        public ProductName ProductName { get; }
+        public ProductName ProductName { get; private set; }
+
+        public void Edit(ProductName productName)
+        {
+            ProductName = productName;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Sales.Infrastructure.Data.ShoppingCart.Repositories
 {
+    using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
     using Domain.Core;
     using UnitOfWork;
@@ -23,7 +24,20 @@
             }
         }
 
-        public async Task<TEntity> Get(int id)
+        public void Delete(TEntity item)
+        {
+            if (item != null)
+            {
+                _unitOfWork
+                    .Attach(item);
+
+                _unitOfWork
+                    .Set<TEntity>()
+                    .Remove(item);
+            }
+        }
+
+        public async Task<TEntity> GetAsync(int id)
         {
             if (id != default)
             {
@@ -32,6 +46,14 @@
             }
 
             return null;
+        }
+
+        public void Modify(TEntity item)
+        {
+            if (item != null)
+            {
+                _unitOfWork.SetModified(item);
+            }
         }
     }
 }

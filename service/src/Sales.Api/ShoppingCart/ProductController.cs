@@ -4,9 +4,37 @@
     using Application.ShoppingCart;
     using Domain.ShoppingCart.Aggregates.ProductAggregate;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.VisualBasic;
 
     public class ProductController : BaseController
     {
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var command = new DeleteProductCommand(id);
+
+            var handler = new DeleteProductHandler();
+
+            await handler.Handle(command);
+
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromBody] EditProductDto dto)
+        {
+            var command = new EditProductCommand(
+                id: id,
+                productName: dto.ProductName);
+
+            var handler = new EditProductHandler();
+
+            await handler
+                .HandleAsync(command);
+
+            return Ok();
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {

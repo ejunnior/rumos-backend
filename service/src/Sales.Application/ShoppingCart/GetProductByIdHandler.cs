@@ -13,7 +13,7 @@
             var repository = new ProductRepository(unitOfWork);
 
             var result = await repository
-                .Get(query.Id);
+                .GetAsync(query.Id);
 
             if (result == null)
             {
