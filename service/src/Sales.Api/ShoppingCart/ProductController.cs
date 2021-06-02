@@ -14,7 +14,8 @@
 
             var handler = new GetProductByIdHandler();
 
-            var result = await handler.HandlerAsync(query);
+            var result = await handler
+                .HandlerAsync(query);
 
             if (result == null)
             {
