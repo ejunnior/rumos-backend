@@ -4,6 +4,8 @@
     using Application.ShoppingCart;
     using Domain.ShoppingCart.Aggregates.ProductAggregate;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.VisualBasic;
 
     public class ProductController : BaseController
@@ -59,6 +61,11 @@
         [Consumes("application/json")]
         public async Task<IActionResult> Register([FromBody] RegisterProductDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var command = new RegisterProductCommand(dto.ProductName);
 
             var handler = new RegisterProductHandler();

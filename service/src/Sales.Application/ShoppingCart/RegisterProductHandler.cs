@@ -20,13 +20,16 @@
             var productName = ProductName
                 .Create(args.ProductName);
 
-            var product = new Product(productName.Value);
+            if (productName.IsSuccess)
+            {
+                var product = new Product(productName.Value);
 
-            repository
-                .Add(product);
+                repository
+                    .Add(product);
 
-            await unitOfWork
-                .CommitAsync();
+                await unitOfWork
+                    .CommitAsync();
+            }
         }
     }
 }
