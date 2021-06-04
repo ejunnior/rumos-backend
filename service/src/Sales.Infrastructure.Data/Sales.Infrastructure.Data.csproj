@@ -7,9 +7,6 @@
 	<ItemGroup>
 		<Compile Remove="ShoppingCart\NewFolder\**" />
 		<EmbeddedResource Remove="ShoppingCart\NewFolder\**" />
-			  <Compile Remove="NewFolder\**" />
-	  <EmbeddedResource Remove="NewFolder\**" />
-	  <None Remove="NewFolder\**" />
 <None Remove="ShoppingCart\NewFolder\**" />
 	</ItemGroup>
 

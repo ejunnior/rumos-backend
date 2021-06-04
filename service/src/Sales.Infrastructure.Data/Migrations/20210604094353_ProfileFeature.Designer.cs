@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sales.Infrastructure.Data.UnitOfWork;
 
 namespace Sales.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(SalesUnitOfWork))]
-    partial class SalesUnitOfWorkModelSnapshot : ModelSnapshot
+    [Migration("20210604094353_ProfileFeature")]
+    partial class ProfileFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace Sales.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("UserBase");
                 });
 
             modelBuilder.Entity("Sales.Domain.ShoppingCart.Aggregates.CartItemAggregate.CartItem", b =>
