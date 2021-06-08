@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Sales.Api
 {
+    using Application.ShoppingCart;
     using Domain.ShoppingCart.Aggregates.CustomerAggregate;
     using Infrastructure.Data.ShoppingCart.Repositories;
     using Infrastructure.Data.UnitOfWork;
@@ -55,6 +56,7 @@ namespace Sales.Api
 
             services.AddScoped<ISalesUnitOfWork, SalesUnitOfWork>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IRegisterCustomerHandler, RegisterCustomerHandler>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
