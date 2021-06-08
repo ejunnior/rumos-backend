@@ -10,14 +10,26 @@
 
     public class ProductController : BaseController
     {
+        private readonly IDeleteProductHandler _deleteHandler;
+        private readonly IEditProductHandler _editHandler;
+        private readonly IRegisterProductHandler _registerHandler;
+
+        public ProductController(
+            IRegisterProductHandler registerHandler,
+            IDeleteProductHandler deleteHandler,
+            IEditProductHandler editHandler)
+        {
+            _registerHandler = registerHandler;
+            _deleteHandler = deleteHandler;
+            _editHandler = editHandler;
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteProductCommand(id);
 
-            var handler = new DeleteProductHandler();
-
-            await handler.Handle(command);
+            await _deleteHandler.HandleAsync(command);
 
             return Ok();
         }
@@ -29,9 +41,7 @@
                 id: id,
                 productName: dto.ProductName);
 
-            var handler = new EditProductHandler();
-
-            await handler
+            await _editHandler
                 .HandleAsync(command);
 
             return Ok();
@@ -68,9 +78,7 @@
 
             var command = new RegisterProductCommand(dto.ProductName);
 
-            var handler = new RegisterProductHandler();
-
-            await handler.HandleAsync(command);
+            await _registerHandler.HandleAsync(command);
 
             return Ok(); //Http200
         }

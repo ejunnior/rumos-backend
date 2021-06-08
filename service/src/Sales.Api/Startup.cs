@@ -15,6 +15,7 @@ namespace Sales.Api
 {
     using Application.ShoppingCart;
     using Domain.ShoppingCart.Aggregates.CustomerAggregate;
+    using Domain.ShoppingCart.Aggregates.ProductAggregate;
     using Infrastructure.Data.ShoppingCart.Repositories;
     using Infrastructure.Data.UnitOfWork;
 
@@ -55,8 +56,14 @@ namespace Sales.Api
             //services.AddScoped() -- Criar uma instancia por resquet igual para todas as classes
 
             services.AddScoped<ISalesUnitOfWork, SalesUnitOfWork>();
+
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
             services.AddScoped<IRegisterCustomerHandler, RegisterCustomerHandler>();
+            services.AddScoped<IRegisterProductHandler, RegisterProductHandler>();
+            services.AddScoped<IDeleteProductHandler, DeleteProductHandler>();
+            services.AddScoped<IEditProductHandler, EditProductHandler>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

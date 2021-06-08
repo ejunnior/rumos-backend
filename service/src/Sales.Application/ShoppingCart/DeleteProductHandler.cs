@@ -5,21 +5,28 @@
     using Infrastructure.Data.ShoppingCart.Repositories;
     using Infrastructure.Data.UnitOfWork;
 
-    public class DeleteProductHandler
+    public class DeleteProductHandler : IDeleteProductHandler
     {
-        public async Task Handle(DeleteProductCommand command)
+        private readonly IProductRepository _repository;
+        private readonly ISalesUnitOfWork _unitOfWork;
+
+        public DeleteProductHandler(
+            ISalesUnitOfWork unitOfWork,
+            IProductRepository repository)
         {
-            var unitOfWork = new SalesUnitOfWork();
+            _unitOfWork = unitOfWork;
+            _repository = repository;
+        }
 
-            var repository = new ProductRepository(unitOfWork);
+        public async Task HandleAsync(DeleteProductCommand args)
+        {
+            var product = await _repository
+                .GetAsync(args.Id);
 
-            var product = await repository
-                .GetAsync(command.Id);
-
-            repository
+            _repository
                 .Delete(product);
 
-            await unitOfWork
+            await _unitOfWork
                 .CommitAsync();
         }
     }

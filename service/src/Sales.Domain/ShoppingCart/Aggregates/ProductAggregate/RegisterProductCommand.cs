@@ -1,6 +1,8 @@
 ﻿namespace Sales.Domain.ShoppingCart.Aggregates.ProductAggregate
 {
-    public class RegisterProductCommand
+    using Core;
+
+    public class RegisterProductCommand : ICommand
     {
         public RegisterProductCommand(string productName)
         {

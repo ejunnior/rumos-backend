@@ -5,15 +5,22 @@
     using Infrastructure.Data.ShoppingCart.Repositories;
     using Infrastructure.Data.UnitOfWork;
 
-    public class EditProductHandler
+    public class EditProductHandler : IEditProductHandler
     {
+        private readonly IProductRepository _repository;
+        private readonly ISalesUnitOfWork _unitOfWork;
+
+        public EditProductHandler(
+            ISalesUnitOfWork unitOfWork,
+            IProductRepository repository)
+        {
+            _unitOfWork = unitOfWork;
+            _repository = repository;
+        }
+
         public async Task HandleAsync(EditProductCommand command)
         {
-            var unitOfWork = new SalesUnitOfWork();
-
-            var repository = new ProductRepository(unitOfWork);
-
-            var product = await repository
+            var product = await _repository
                 .GetAsync(command.Id);
 
             var productName = ProductName
@@ -22,10 +29,10 @@
             product
                 .Edit(productName.Value);
 
-            repository
+            _repository
                 .Modify(product);
 
-            await unitOfWork
+            await _unitOfWork
                 .CommitAsync();
         }
     }

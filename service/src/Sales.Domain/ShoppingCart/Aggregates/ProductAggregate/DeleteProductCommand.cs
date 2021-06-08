@@ -1,6 +1,8 @@
 ﻿namespace Sales.Domain.ShoppingCart.Aggregates.ProductAggregate
 {
-    public class DeleteProductCommand
+    using Core;
+
+    public class DeleteProductCommand : ICommand
     {
         public DeleteProductCommand(int id)
         {

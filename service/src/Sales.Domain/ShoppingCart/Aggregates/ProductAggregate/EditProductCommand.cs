@@ -1,6 +1,8 @@
 ﻿namespace Sales.Domain.ShoppingCart.Aggregates.ProductAggregate
 {
-    public class EditProductCommand
+    using Core;
+
+    public class EditProductCommand : ICommand
     {
         public EditProductCommand(
             int id,
