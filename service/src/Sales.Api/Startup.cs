@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace Sales.Api
 {
+    using Infrastructure.Data.UnitOfWork;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -21,17 +23,6 @@ namespace Sales.Api
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sales.Api", Version = "v1" });
-            });
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,6 +41,18 @@ namespace Sales.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<ISalesUnitOfWork, SalesUnitOfWork>();
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sales.Api", Version = "v1" });
             });
         }
     }

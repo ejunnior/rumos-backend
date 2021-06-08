@@ -1,16 +1,15 @@
 ﻿namespace Sales.Infrastructure.Data.ShoppingCart.Repositories
 {
-    using System.Runtime.CompilerServices;
-    using System.Threading.Tasks;
     using Domain.Core;
+    using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
     using UnitOfWork;
 
-    public class Repository<TEntity>
-        where TEntity : AggregateRoot
+    public class Repository<TEntity> : IRepository<TEntity>
     {
-        private readonly SalesUnitOfWork _unitOfWork;
+        private readonly ISalesUnitOfWork _unitOfWork;
 
-        public Repository(SalesUnitOfWork unitOfWork)
+        public Repository(ISalesUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -19,8 +18,8 @@
         {
             if (item != null)
             {
-                _unitOfWork
-                    .Set<TEntity>().Add(item);
+                GetSet()
+                    .Add(item);
             }
         }
 
@@ -28,11 +27,10 @@
         {
             if (item != null)
             {
-                _unitOfWork
-                    .Attach(item);
+                //_unitOfWork
+                //    .Attach(item);
 
-                _unitOfWork
-                    .Set<TEntity>()
+                GetSet()
                     .Remove(item);
             }
         }
@@ -41,8 +39,8 @@
         {
             if (id != default)
             {
-                return await _unitOfWork
-                    .Set<TEntity>().FindAsync(id);
+                return await GetSet()
+                    .FindAsync(id);
             }
 
             return null;
@@ -54,6 +52,12 @@
             {
                 _unitOfWork.SetModified(item);
             }
+        }
+
+        private DbSet<TEntity> GetSet()
+        {
+            return _unitOfWork
+                .CreateSet<TEntity>();
         }
     }
 }

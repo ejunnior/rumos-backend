@@ -3,9 +3,9 @@
     using Domain.ShoppingCart.Aggregates.CustomerAggregate;
     using UnitOfWork;
 
-    public class CustomerRepository : Repository<Customer>
+    public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
-        public CustomerRepository(SalesUnitOfWork unitOfWork)
+        public CustomerRepository(ISalesUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
         }

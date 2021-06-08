@@ -7,11 +7,16 @@
 
     public class RegisterCustomerHandler
     {
+        private readonly ISalesUnitOfWork _unitOfWork;
+
+        public RegisterCustomerHandler(ISalesUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public async Task HandleAsync(RegisterCustomerCommand command)
         {
-            var unitOfWork = new SalesUnitOfWork();
-
-            var repository = new CustomerRepository(unitOfWork);
+            var repository = new CustomerRepository(_unitOfWork);
 
             var customerName = CustomerName
                 .Create(command.CustomerName);
@@ -21,7 +26,7 @@
             repository
                 .Add(customer);
 
-            await unitOfWork
+            await _unitOfWork
                 .CommitAsync();
         }
     }
