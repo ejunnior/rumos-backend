@@ -5,7 +5,8 @@
     using System.Threading.Tasks;
     using UnitOfWork;
 
-    public class Repository<TEntity> : IRepository<TEntity>
+    public class Repository<TEntity> :
+        IRepository<TEntity> where TEntity : AggregateRoot
     {
         private readonly ISalesUnitOfWork _unitOfWork;
 

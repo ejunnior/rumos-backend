@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace Sales.Api
 {
+    using Domain.ShoppingCart.Aggregates.CustomerAggregate;
+    using Infrastructure.Data.ShoppingCart.Repositories;
     using Infrastructure.Data.UnitOfWork;
 
     public class Startup
@@ -47,7 +49,12 @@ namespace Sales.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ISalesUnitOfWork, SalesUnitOfWork>();
+            //services.AddTransient() -- Todo request para API é criada uma nova instancia
+            //services.AddSingleton() -- Na primeira execucao da API é criada uma instancia e utilizada por todas as classes
+            //services.AddScoped() -- Criar uma instancia por resquet igual para todas as classes
+
+            services.AddScoped<ISalesUnitOfWork, SalesUnitOfWork>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

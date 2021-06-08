@@ -9,22 +9,20 @@ namespace Sales.Api.ShoppingCart
 
     public class CustomerController : BaseController
     {
-        private readonly ISalesUnitOfWork _unitOfWork;
+        private readonly IRegisterCustomerHandler _handler;
 
-        public CustomerController(ISalesUnitOfWork unitOfWork)
+        public CustomerController(IRegisterCustomerHandler handler)
         {
-            _unitOfWork = unitOfWork;
+            _handler = handler;
         }
 
         [HttpPost]
         [Consumes("application/json")]
         public async Task<IActionResult> Register([FromBody] RegisterCustomerDto dto)
         {
-            var handler = new RegisterCustomerHandler(_unitOfWork);
-
             var command = new RegisterCustomerCommand(dto.CustomerName);
 
-            await handler
+            await _handler
                 .HandleAsync(command);
 
             return Ok();

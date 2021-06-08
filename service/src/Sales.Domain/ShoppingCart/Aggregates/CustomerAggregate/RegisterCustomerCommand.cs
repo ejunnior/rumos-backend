@@ -1,6 +1,8 @@
 ﻿namespace Sales.Domain.ShoppingCart.Aggregates.CustomerAggregate
 {
-    public class RegisterCustomerCommand
+    using Core;
+
+    public class RegisterCustomerCommand : ICommand
     {
         public RegisterCustomerCommand(string customerName)
         {

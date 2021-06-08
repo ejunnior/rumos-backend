@@ -1,29 +1,30 @@
 ﻿namespace Sales.Application.ShoppingCart
 {
-    using System.Threading.Tasks;
     using Domain.ShoppingCart.Aggregates.CustomerAggregate;
-    using Infrastructure.Data.ShoppingCart.Repositories;
     using Infrastructure.Data.UnitOfWork;
+    using System.Threading.Tasks;
 
-    public class RegisterCustomerHandler
+    public class RegisterCustomerHandler : IRegisterCustomerHandler
     {
+        private readonly ICustomerRepository _repository;
         private readonly ISalesUnitOfWork _unitOfWork;
 
-        public RegisterCustomerHandler(ISalesUnitOfWork unitOfWork)
+        public RegisterCustomerHandler(
+            ISalesUnitOfWork unitOfWork,
+            ICustomerRepository repository)
         {
             _unitOfWork = unitOfWork;
+            _repository = repository;
         }
 
         public async Task HandleAsync(RegisterCustomerCommand command)
         {
-            var repository = new CustomerRepository(_unitOfWork);
-
             var customerName = CustomerName
                 .Create(command.CustomerName);
 
             var customer = new Customer(customerName.Value);
 
-            repository
+            _repository
                 .Add(customer);
 
             await _unitOfWork
